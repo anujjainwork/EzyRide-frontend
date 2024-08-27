@@ -1,16 +1,16 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:ezyride_frontend/config.dart';
+import 'package:ezyride_frontend/driver/startride/welcome.dart';
 import 'package:ezyride_frontend/themedata/customtext.dart';
 import 'package:ezyride_frontend/themedata/customtextfield.dart';
-import 'package:ezyride_frontend/welcome_page/welcome.dart';
+import 'package:ezyride_frontend/rider/welcome_page/welcome_rider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart'; // For JSON encoding
-
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -22,7 +22,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
-  final _yearController = TextEditingController();
+  final _rollnoController = TextEditingController();
   final _emergencynoController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -40,7 +40,11 @@ class _SignUpState extends State<SignUp> {
             Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xFFCDE9FF), Color(0xFFD9E7F1), Color(0xFFE4E4E4)],
+                  colors: [
+                    Color(0xFFCDE9FF),
+                    Color(0xFFD9E7F1),
+                    Color(0xFFE4E4E4)
+                  ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -85,7 +89,8 @@ class _SignUpState extends State<SignUp> {
                         validator: (value) {
                           final trimmedValue = value?.trim();
                           if (trimmedValue == null || trimmedValue.isEmpty) {
-                            showCustomSnackbar(context, "Please enter your name");
+                            showCustomSnackbar(
+                                context, "Please enter your name");
                           }
                           return null;
                         },
@@ -93,15 +98,25 @@ class _SignUpState extends State<SignUp> {
                       const SizedBox(height: 24.0),
                       // Enter Year
                       CustomTextField(
-                        label: 'Enter Year',
-                        controller: _yearController,
+                        label: 'Enter Roll no.',
+                        controller: _rollnoController,
                         obscureText: false,
                         screenHeight: screenHeight,
                         screenWidth: screenWidth,
-                        inputFormatters: [FilteringTextInputFormatter.digitsOnly], // Only allow digits
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(
+                              r'[A-Za-z0-9]')), // Allow only alphanumeric characters
+                        ],
                         validator: (value) {
+                          final pattern = r'^BT\d{2}[A-Z]{3}\d{4}$';
+                          final regExp = RegExp(pattern);
                           if (value == null || value.isEmpty) {
-                            showCustomSnackbar(context, "Please enter a year");
+                            showCustomSnackbar(
+                                context, "Please enter a roll number");
+                            return 'Please enter a roll number';
+                          } else if (!regExp.hasMatch(value)) {
+                            showCustomSnackbar(context,
+                                "Please enter a valid roll number in the format BT00ABC0000");
                           }
                           return null;
                         },
@@ -114,10 +129,16 @@ class _SignUpState extends State<SignUp> {
                         obscureText: false,
                         screenHeight: screenHeight,
                         screenWidth: screenWidth,
-                        inputFormatters: [FilteringTextInputFormatter.digitsOnly], // Only allow digits
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ], 
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            showCustomSnackbar(context, "Please enter an emergency no.");
+                            showCustomSnackbar(
+                                context, "Please enter an emergency no.");
+                          }
+                          else if(value.length>10 || value.length<10){
+                            showCustomSnackbar(context, "Please enter a valid no.");
                           }
                           return null;
                         },
@@ -132,10 +153,13 @@ class _SignUpState extends State<SignUp> {
                         screenWidth: screenWidth,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            showCustomSnackbar(context, "Please enter an email");
+                            showCustomSnackbar(
+                                context, "Please enter an email");
                           }
-                          if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value??"")) {
-                            showCustomSnackbar(context, "Please enter a valid email");
+                          if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                              .hasMatch(value ?? "")) {
+                            showCustomSnackbar(
+                                context, "Please enter a valid email");
                           }
                           return null;
                         },
@@ -150,7 +174,8 @@ class _SignUpState extends State<SignUp> {
                         screenWidth: screenWidth,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            showCustomSnackbar(context, "Please enter a password");
+                            showCustomSnackbar(
+                                context, "Please enter a password");
                           }
                           return null;
                         },
@@ -164,10 +189,10 @@ class _SignUpState extends State<SignUp> {
                             final email = _emailController.text;
                             final password = _passwordController.text;
                             final name = _nameController.text;
-                            final year = _yearController.text;
+                            final roll_no = _rollnoController.text;
                             // For example, print the credentials
                             print('Name: $name');
-                            print('Year: $year');
+                            print('Rollno: $roll_no');
                             print('Email: $email');
                             print('Password: $password');
                             await _signUp();
@@ -177,8 +202,10 @@ class _SignUpState extends State<SignUp> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Colors.black, // Background color of the button
-                          minimumSize: Size(screenWidth * 0.5,
-                              screenHeight * 0.04), // Size of the button (width and height)
+                          minimumSize: Size(
+                              screenWidth * 0.5,
+                              screenHeight *
+                                  0.04), // Size of the button (width and height)
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 8.0), // Rounded corners of the button
@@ -191,10 +218,9 @@ class _SignUpState extends State<SignUp> {
                           fontSize: 16,
                           color: Colors.white,
                           textAlign: TextAlign.start,
-                          fontWeight: FontWeight.bold ,
+                          fontWeight: FontWeight.bold,
                         ),
                       )
-
                     ],
                   ),
                 ),
@@ -205,101 +231,105 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
-void showCustomSnackbar(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(
-        message,
-        style: const TextStyle(color: Colors.white),
+
+  void showCustomSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 3),
       ),
-      backgroundColor: Colors.black,
-      behavior: SnackBarBehavior.floating,
-      duration: const Duration(seconds: 3),
-    ),
-  );
-}
-Future<void> _signUp() async {
-  const String base = Config.baseUrl;
-  const url = '$base/auth/signup'; 
-try{
-    final response = await http.post(
-    Uri.parse(url),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: jsonEncode({
-      'name': _nameController.text,
-      'year': _yearController.text,
-      'emergency_contact': _emergencynoController.text,
-      'email': _emailController.text,
-      'password': _passwordController.text,
-      "roles":["RIDER"]
-    }),
-  );
-
-  if (response.statusCode == 200) {
-    // Handle success
-    showCustomSnackbar(context, "Sign up successful!");
-    // You can navigate to another screen or perform additional actions here
-  } else {
-    // Handle error
-    showCustomSnackbar(context, "Sign up failed. Please try again.");
-  }
-}
-catch(e){
-  throw Exception(e);
-}
-}
-
-
-Future<void> _login(BuildContext context) async {
-  const String base = Config.baseUrl;
-  final url = '$base/auth/login';
-
-  print('Email: ${_emailController.text}');
-  print('Password: ${_passwordController.text}');
-  final email = _emailController.text.trim();
-  final password = _passwordController.text.trim();
-
-
-  try {
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode({
-        "email":email,
-        "password":password
-      }),
     );
-
-    if (response.statusCode == 200) {
-      final responseBody = jsonDecode(response.body);
-      final accessToken = responseBody['accessToken'];
-
-      if (accessToken != null) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('accessToken', accessToken);
-        print("Login successful and token saved");
-
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Welcome()),
-        );
-      } else {
-        print("Login successful but no access token found");
-      }
-    } else {
-      // Handle error response
-      print('Failed to login: ${response.statusCode}');
-      print('Error response: ${response.body}');
-    }
-  } catch (e) {
-    print('Exception occurred: $e');
   }
-}
 
+  Future<void> _signUp() async {
+    const String base = Config.baseUrl;
+    const url = '$base/auth/signup';
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'name': _nameController.text,
+          'roll_no': _rollnoController.text,
+          'emergency_contact': _emergencynoController.text,
+          'email': _emailController.text,
+          'password': _passwordController.text,
+          "roles": ["RIDER"]
+        }),
+      );
 
+      if (response.statusCode == 200) {
+        // Handle success
+        showCustomSnackbar(context, "Sign up successful!");
+        // You can navigate to another screen or perform additional actions here
+      } else {
+        // Handle error
+        showCustomSnackbar(context, "Sign up failed. Please try again.");
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 
+  Future<void> _login(BuildContext context) async {
+    const String base = Config.baseUrl;
+    final url = '$base/auth/login';
+
+    print('Email: ${_emailController.text}');
+    print('Password: ${_passwordController.text}');
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({"email": email, "password": password}),
+      );
+
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+        final String accessToken = responseBody['accessToken'];
+        final String refreshToken = responseBody['refreshToken'];
+        final List<dynamic> rolesDynamic = responseBody['roles'];
+
+        // Convert List<dynamic> to List<String>
+        final List<String> roles = rolesDynamic.cast<String>();
+
+        if (accessToken != null) {
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('accessToken', accessToken);
+          await prefs.setString('refreshToken', refreshToken);
+          await prefs.setStringList('roles', roles);
+
+          print("Login successful and token saved");
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => roles.contains("DRIVER")
+                    ? WelcomeDriver()
+                    : WelcomeRider()),
+          );
+        } else {
+          print("Login successful but no access token found");
+        }
+      } else {
+        // Handle error response
+        print('Failed to login: ${response.statusCode}');
+        print('Error response: ${response.body}');
+      }
+    } catch (e) {
+      print('Exception occurred: $e');
+    }
+  }
 }

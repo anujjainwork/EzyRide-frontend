@@ -1,17 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ezyride_frontend/driver/startride/home_page.dart';
 import 'package:ezyride_frontend/themedata/customtext.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
-class Welcome extends StatefulWidget {
-  const Welcome({super.key});
+class WelcomeDriver extends StatefulWidget {
+  const WelcomeDriver({super.key});
 
   @override
-  State<Welcome> createState() => _WelcomeState();
+  State<WelcomeDriver> createState() => _WelcomeDriverState();
 }
 
-class _WelcomeState extends State<Welcome> {
+class _WelcomeDriverState extends State<WelcomeDriver> {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
@@ -20,12 +21,13 @@ class _WelcomeState extends State<Welcome> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration:const BoxDecoration(
-              gradient: LinearGradient(
-            colors: [Color(0xFFCDE9FF), Color(0xFFD9E7F1), Color(0xFFE4E4E4)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          )),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFFCDE9FF), Color(0xFFD9E7F1), Color(0xFFE4E4E4)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
           child: Stack(
             children: [
               Align(
@@ -43,28 +45,12 @@ class _WelcomeState extends State<Welcome> {
                   children: [
                     InkWell(
                       onTap: () {
-                        // Handle tap
-                      },
-                      child: Container(
-                        height: screenHeight * 0.05,
-                        width: screenWidth * 0.75,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: CustomText(
-                          text: "Check Availablity",
-                          fontSize: 16,
-                          textAlign: TextAlign.center,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20,),
-                    InkWell(
-                      onTap: () {
-                        // Handle tap
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DriverHomePage(),
+                          ),
+                        );
                       },
                       child: Container(
                         height: screenHeight * 0.05,
@@ -73,9 +59,16 @@ class _WelcomeState extends State<Welcome> {
                         decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(8.0),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
                         child: CustomText(
-                          text: "Start Riding",
+                          text: "Start Shift",
                           fontSize: 16,
                           textAlign: TextAlign.center,
                           color: Colors.white,
