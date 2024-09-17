@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		XvtN1VXMTbZIuagvXrxo8keJz8I=
+		H+vkjmnsDM/Y88v72X5Y7h4Xw0o=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		91aiuzIAGqYcvP8O7ztwZQ+R1gU=
+		XS4BWp6h5HF5hRd5ooj0fDO1AmU=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		gfMmAQ2PsGJ6/EqBiZyKWAZo6zw=
+		1+9dUGXc3Lqave+CjcgbSO9YfjA=
 		</data>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		LwbZy5YoAzg4VzF3+/L6VPzuP1U=
+		WIuO3p8J+7VDu4nRPaxNbnmE7XI=
 		</data>
 		<key>flutter_assets/lib/assets/.DS_Store</key>
 		<data>
@@ -54,11 +54,15 @@
 		</data>
 		<key>flutter_assets/lib/assets/images/ezyridelogo.svg</key>
 		<data>
-		O69WslF8brETsx1kb/6+Um8zO+Y=
+		3B+bGt5xiCnQjy2P9j/CZjoRfZI=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
 		Bvk+P1ykE1PGRdktwgwDyz6AOqM=
+		</data>
+		<key>flutter_assets/packages/flutter_map/lib/assets/flutter_map_logo.png</key>
+		<data>
+		kUCCgXRmQ7Ql3lxXrdQuoudq1L8=
 		</data>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -75,14 +79,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			OvIBJX3dctB2h9va1nGH/aHyJP4X7uRvfAGDJc+rMr0=
+			zYns17SZhNJjcNSQAiD3hjPjnO+J76lTCEXNa7FO5BQ=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zeDXQQP9m9PsNARqDikho7kMSGv2RRGr6ygeEGaCn4s=
+			89aCDD57U0hZ7BlqwPqjMHZbZx+rb9v6bXqEth4V3ec=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -96,7 +100,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			uGKfLx1SLIz1jrVDE+aTZ6OnPlWY66Q3BIgXypvtijQ=
+			33e46KNhhlWVLxZ8Mcp3+TzSDbByw/EHW5H0CH98Xcw=
 			</data>
 		</dict>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -117,7 +121,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			kuJVqlp+dzg62+SEvo5Vf4Xqyca3JwpBZhnXs4+jZlE=
+			P76KDox/fA6OSl1URsOjFLpkogpMIESAu3OmbzIUk6E=
 			</data>
 		</dict>
 		<key>flutter_assets/lib/assets/images/autorickshaw.png</key>
@@ -145,7 +149,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ck4FrGfhWwjm2W1TVgT/Yo4CkMbak4RJnaDRtHORrz4=
+			YKu3c3L1O2dHF7AmXM1OLeJVw+vQl5pf0aENb2M4FlM=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -153,6 +157,13 @@
 			<key>hash2</key>
 			<data>
 			Z8RP6Rg7AC553ef2l34piGYcmj5KPF/OloeH79vtgjw=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_map/lib/assets/flutter_map_logo.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			YFGuQvtQWTGoM+WPkgmp+WZppNDks/BvbYLN4SoOBAE=
 			</data>
 		</dict>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>

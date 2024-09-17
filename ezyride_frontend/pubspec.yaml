@@ -10,6 +10,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  location: ^6.0.2 # Make sure you're using a version that supports background location updates
+  provider: ^6.1.2 # This is already correct
+  web_socket_channel: ^3.0.1 # Add a version constraint
+  google_maps_flutter:
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  geolocator:
   http:
   shared_preferences:
   cupertino_icons:
@@ -18,7 +25,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   assets:

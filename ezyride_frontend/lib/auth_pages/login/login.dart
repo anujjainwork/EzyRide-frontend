@@ -1,11 +1,12 @@
-// ignore_for_file: avoid_print, prefer_const_constructors
+// ignore_for_file: avoid_print, prefer_const_constructors, use_build_context_synchronously
 
 import 'dart:convert';
 
 import 'package:ezyride_frontend/config.dart';
+import 'package:ezyride_frontend/driver/startride/welcome.dart';
 import 'package:ezyride_frontend/themedata/customtext.dart';
 import 'package:ezyride_frontend/themedata/customtextfield.dart';
-import 'package:ezyride_frontend/welcome_page/welcome.dart';
+import 'package:ezyride_frontend/rider/welcome_page/welcome_rider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -102,7 +103,7 @@ class _LoginState extends State<Login> {
                       const SizedBox(height: 70.0),
                       // Login Up Button
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async{
                           if (_formKey.currentState?.validate() ?? false) {
                             // Process the login here
                             final email = _emailController.text;
@@ -110,6 +111,7 @@ class _LoginState extends State<Login> {
                             // For example, print the credentials
                             print('Email: $email');
                             print('Password: $password');
+                            await _login(context);
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -177,17 +179,26 @@ Future<void> _login(BuildContext context) async {
       final responseBody = jsonDecode(response.body);
 
       // Check if the response contains an access token
-      final accessToken = responseBody['accessToken'];
+      final String accessToken = responseBody['accessToken'];
+      final String refreshToken = responseBody['refreshToken'];
+      final List<dynamic> rolesDynamic = responseBody['roles'];
+
+        // Convert List<dynamic> to List<String>
+        final List<String> roles = rolesDynamic.cast<String>();
       if (accessToken != null) {
         // Save the access token in SharedPreferences
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('accessToken', accessToken);
-        print("Login successful and token saved");
+        await prefs.setString('refreshToken', refreshToken);
+        await prefs.setStringList('roles',roles);
+        print("Login successful, tokens and roles saved");
 
         // Navigate to the Welcome screen
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => Welcome()),
+          MaterialPageRoute(builder: (context) => 
+          roles.contains("DRIVER")?
+          WelcomeDriver():WelcomeRider()),
         );
       } else {
         print("Login successful but no access token found");
