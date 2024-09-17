@@ -5,22 +5,22 @@ import 'dart:convert';
 import 'package:ezyride_frontend/auth_pages/auth.dart';
 import 'package:ezyride_frontend/config.dart';
 import 'package:ezyride_frontend/rider/droplocations/locations.dart';
-import 'package:ezyride_frontend/rider/request_ride/loader_screen.dart';
+import 'package:ezyride_frontend/rider/verifying_otp/loader_screen.dart';
 import 'package:ezyride_frontend/themedata/customtext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class StartRide extends StatefulWidget {
-  const StartRide({super.key});
+class EnterLocation extends StatefulWidget {
+  const EnterLocation({super.key});
 
   @override
-  State<StartRide> createState() => _StartRideState();
+  State<EnterLocation> createState() => _EnterLocationState();
 }
 
-class _StartRideState extends State<StartRide> {
-  List<Location> locations = [];
+class _EnterLocationState extends State<EnterLocation> {
+ List<Location> locations = [];
   bool _isIconEnable = true;
   bool _isMenuOpen = false;
   String? accessToken;
@@ -29,6 +29,8 @@ class _StartRideState extends State<StartRide> {
   int? riderId;
   Location? selectedLocation;
   final TextEditingController _otpController = TextEditingController();
+  final TextEditingController _totalMemberController = TextEditingController();
+
 
   @override
   void initState() {
@@ -187,7 +189,7 @@ class _StartRideState extends State<StartRide> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
-                      height: screenHeight * 0.335,
+                      height: screenHeight * 0.37,
                       width: screenWidth * 0.8,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -331,6 +333,43 @@ class _StartRideState extends State<StartRide> {
                                 padding:
                                     const EdgeInsets.only(top: 25, left: 25),
                                 child: const CustomText(
+                                  text: "Enter total members",
+                                  fontSize: 16,
+                                  textAlign: TextAlign.start,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              const Spacer(),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 25, right: 25),
+                                child: Container(
+                                  height: screenHeight * 0.04,
+                                  width: screenWidth * 0.24,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: TextField(
+                                    textAlign: TextAlign.center,
+                                    keyboardType: TextInputType.number,
+                                    controller: _totalMemberController,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 25, left: 25),
+                                child: const CustomText(
                                   text: "Enter OTP",
                                   fontSize: 16,
                                   textAlign: TextAlign.start,
@@ -371,7 +410,8 @@ class _StartRideState extends State<StartRide> {
                             content: CustomText(
                               text: _otpController.text.isEmpty
                                   ? 'Please enter the OTP.'
-                                  : 'Please select a drop-off location.',
+                                  : _totalMemberController.text.isEmpty
+                                  ?'Please enter total members riding':'Please select a drop-off location.',
                               textAlign: TextAlign.center,
                               color: Colors.white,
                               fontSize: 14, 
@@ -391,7 +431,8 @@ class _StartRideState extends State<StartRide> {
                                       dropLocation: selectedLocation!.name,
                                       riderId: riderId!,
                                       username: username!,
-                                      otp: _otpController.text,)));
+                                      otp: _otpController.text,
+                                      totalMembers:_totalMemberController.text)));
                         }
                       },
                       child: Container(

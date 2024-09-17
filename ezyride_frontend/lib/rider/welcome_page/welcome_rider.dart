@@ -2,7 +2,7 @@
 
 import 'package:ezyride_frontend/auth_pages/auth.dart';
 import 'package:ezyride_frontend/rider/welcome_page/check_availability/check_avail_screen.dart';
-import 'package:ezyride_frontend/rider/welcome_page/start_riding/start_ride_screen.dart';
+import 'package:ezyride_frontend/rider/welcome_page/start_riding/enter_location.dart';
 import 'package:ezyride_frontend/themedata/customtext.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +119,7 @@ class _WelcomeRiderState extends State<WelcomeRider> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => StartRide()));
+                                  builder: (context) => EnterLocation()));
                         },
                         child: Container(
                           height: screenHeight * 0.05,

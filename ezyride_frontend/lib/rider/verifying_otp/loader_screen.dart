@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:ezyride_frontend/config.dart';
-import 'package:ezyride_frontend/rider/request_ride/request_ride_screen.dart';
 import 'package:ezyride_frontend/rider/ride_started/rider_start_screen.dart';
-import 'package:ezyride_frontend/rider/request_ride/Loader.dart';
+import 'package:ezyride_frontend/rider/verifying_otp/Loader.dart';
+import 'package:ezyride_frontend/rider/welcome_page/start_riding/enter_location.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +15,7 @@ class LoaderScreen extends StatefulWidget {
   final int riderId;
   final String username;
   final String otp;
+  final String totalMembers;
 
   const LoaderScreen({
     super.key,
@@ -23,6 +24,7 @@ class LoaderScreen extends StatefulWidget {
     required this.riderId,
     required this.username,
     required this.otp,
+    required this.totalMembers
   });
 
   @override
@@ -60,7 +62,7 @@ class _LoaderScreenState extends State<LoaderScreen> {
     const String baseUrl = Config.baseUrl;
     String url = "$baseUrl/requestride/verifyotp?otp=$otp";
     final prefs = await SharedPreferences.getInstance();
-    accessToken = await prefs.getString('accessToken');
+    accessToken = prefs.getString('accessToken');
 
     try {
       // Get the current location of the device
@@ -76,10 +78,9 @@ class _LoaderScreenState extends State<LoaderScreen> {
         },
         body: jsonEncode({
           "pickUpLocation": [position.longitude, position.latitude],
-          "dropOffLocation": {
-            "name":widget.dropLocation,
-            "locationPoint":widget.dropLocationCoordinates
-          },
+          "dropOffLocation": widget.dropLocationCoordinates,
+          "dropOffLocationName":widget.dropLocation,
+          "totalMembers":widget.totalMembers,
           "requestedTime": DateTime.now().toIso8601String(),
           "rider": {"id": widget.riderId, "name": widget.username},
           "paymentMethod": "UPI",
@@ -121,7 +122,7 @@ class _LoaderScreenState extends State<LoaderScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>StartRide()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>EnterLocation()));
               },
               child: const Text("OK"),
             ),
