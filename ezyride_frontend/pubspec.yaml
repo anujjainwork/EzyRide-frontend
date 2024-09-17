@@ -10,10 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.2.2 # Add a version constraint
-  shared_preferences: ^2.1.0 # Add a version constraint
-  cupertino_icons: ^1.0.5
-  flutter_svg: ^2.0.10+1
   location: ^6.0.2 # Make sure you're using a version that supports background location updates
   provider: ^6.1.2 # This is already correct
   web_socket_channel: ^3.0.1 # Add a version constraint
@@ -21,6 +17,10 @@ dependencies:
   flutter_map: ^7.0.2
   latlong2: ^0.9.1
   geolocator:
+  http:
+  shared_preferences:
+  cupertino_icons:
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:
