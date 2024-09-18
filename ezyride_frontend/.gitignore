@@ -1,7 +1,4 @@
-# Do not remove or rename entries in this file, only add new ones
-# See https://github.com/flutter/flutter/issues/128635 for more context.
-
-# Miscellaneous
+# --- Miscellaneous ---
 *.class
 *.lock
 *.log
@@ -13,19 +10,19 @@
 .history
 .svn/
 
-# IntelliJ related
+# --- IntelliJ related ---
 *.iml
 *.ipr
 *.iws
 .idea/
 
-# Visual Studio Code related
+# --- Visual Studio Code related ---
 .classpath
 .project
 .settings/
-.vscode/*
+.vscode/
 
-# Flutter repo-specific
+# --- Flutter repo-specific ---
 /bin/cache/
 /bin/internal/bootstrap.bat
 /bin/internal/bootstrap.sh
@@ -45,10 +42,10 @@
 version
 analysis_benchmark.json
 
-# packages file containing multi-root paths
+# Generated multi-root paths
 .packages.generated
 
-# Flutter/Dart/Pub related
+# --- Flutter/Dart/Pub related ---
 **/doc/api/
 .dart_tool/
 .flutter-plugins
@@ -64,22 +61,21 @@ linked_*.ds
 unlinked.ds
 unlinked_spec.ds
 
-# Android related
+# --- Android related ---
+/android/.gradle
+/android/.idea/
+/android/build/
+/android/captures/
+/android/local.properties
 gradle-wrapper.jar
-/.gradle
-/captures/
 /gradlew
 /gradlew.bat
-/local.properties
 GeneratedPluginRegistrant.java
-
-# Remember to never publicly share your keystore.
-# See https://flutter.dev/docs/deployment/android#reference-the-keystore-from-the-app
 key.properties
 **/*.keystore
 **/*.jks
 
-# iOS/XCode related
+# --- iOS/XCode related ---
 **/ios/**/*.mode1v3
 **/ios/**/*.mode2v3
 **/ios/**/*.moved-aside
@@ -96,101 +92,62 @@ key.properties
 **/ios/**/profile
 **/ios/**/xcuserdata
 **/ios/.generated/
-**/ios/Flutter/.last_build_id
-**/ios/Flutter/App.framework
-**/ios/Flutter/Flutter.framework
-**/ios/Flutter/Flutter.podspec
-**/ios/Flutter/Generated.xcconfig
-**/ios/Flutter/ephemeral
-**/ios/Flutter/app.flx
-**/ios/Flutter/app.zip
-**/ios/Flutter/flutter_assets/
-**/ios/Flutter/flutter_export_environment.sh
-**/ios/ServiceDefinitions.json
-**/ios/Runner/GeneratedPluginRegistrant.*
+/ios/Flutter/.last_build_id
+/ios/Flutter/App.framework
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Flutter.podspec
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/ephemeral
+/ios/Flutter/app.flx
+/ios/Flutter/app.zip
+/ios/Flutter/flutter_assets/
+/ios/Flutter/flutter_export_environment.sh
+/ios/ServiceDefinitions.json
+/ios/Runner/GeneratedPluginRegistrant.*
 
-**/dgph
-*.mode1v3
-*.mode2v3
-*.moved-aside
-*.pbxuser
-*.perspectivev3
-**/*sync/
-.sconsign.dblite
-.tags*
-**/.vagrant/
-**/DerivedData/
-Icon?
-**/Pods/
-**/.symlinks/
-profile
-xcuserdata
-**/.generated/
-Flutter/App.framework
-Flutter/Flutter.framework
-Flutter/Flutter.podspec
-Flutter/Generated.xcconfig
-Flutter/ephemeral/
-Flutter/app.flx
-Flutter/app.zip
-Flutter/flutter_assets/
-Flutter/flutter_export_environment.sh
-ServiceDefinitions.json
-Runner/GeneratedPluginRegistrant.*
+# --- macOS ---
+**/macos/**/*.mode1v3
+**/macos/**/*.mode2v3
+**/macos/**/*.pbxuser
+**/macos/**/*.perspectivev3
+**/macos/**/*sync/
+**/macos/**/.sconsign.dblite
+**/macos/**/.tags*
+**/macos/**/.vagrant/
+**/macos/**/DerivedData/
+**/macos/**/Pods/
+**/macos/**/.symlinks/
+**/macos/**/profile
+**/macos/**/xcuserdata/
+**/macos/.generated/
+/macos/Flutter/GeneratedPluginRegistrant.swift
+/macos/Flutter/ephemeral/
 
-# Exceptions to above rules.
+# --- Windows ---
+**/windows/flutter/ephemeral/
+/windows/flutter/generated_plugin_registrant.cc
+/windows/flutter/generated_plugin_registrant.h
+/windows/flutter/generated_plugins.cmake
+
+# --- Linux ---
+**/linux/flutter/ephemeral/
+/linux/flutter/generated_plugin_registrant.cc
+/linux/flutter/generated_plugin_registrant.h
+/linux/flutter/generated_plugins.cmake
+
+# --- Coverage ---
+coverage/
+
+# --- Symbols ---
+app.*.symbols
+
+# --- Exceptions ---
 !default.mode1v3
 !default.mode2v3
 !default.pbxuser
 !default.perspectivev3
 
-
-# macOS
-**/Flutter/ephemeral/
-**/Pods/
-**/macos/Flutter/GeneratedPluginRegistrant.swift
-**/macos/Flutter/ephemeral
-**/xcuserdata/
-
-# Windows
-**/windows/flutter/ephemeral/
-**/windows/flutter/generated_plugin_registrant.cc
-**/windows/flutter/generated_plugin_registrant.h
-**/windows/flutter/generated_plugins.cmake
-
-# Linux
-**/linux/flutter/ephemeral/
-**/linux/flutter/generated_plugin_registrant.cc
-**/linux/flutter/generated_plugin_registrant.h
-**/linux/flutter/generated_plugins.cmake
-
-# Coverage
-coverage/
-
-# Symbols
-app.*.symbols
-
-# Exceptions to above rules.
-!**/ios/**/default.mode1v3
-!**/ios/**/default.mode2v3
-!**/ios/**/default.pbxuser
-!**/ios/**/default.perspectivev3
+# Exceptions to above rules
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
-
-
-# macOS
-macos/Flutter/GeneratedPluginRegistrant.swift
-
-# Windows
-windows/flutter/generated_plugin_registrant.cc
-windows/flutter/generated_plugins.cmake
-
-# Linux
-linux/flutter/generated_plugin_registrant.cc
-linux/flutter/generated_plugins.cmake
-
-
-#android
-android/local.properties
