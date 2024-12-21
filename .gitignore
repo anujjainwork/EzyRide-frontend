@@ -1,0 +1,58 @@
+# Flutter specific
+# Dart & Flutter build output
+**/build/
+**/ios/Flutter/.last_build_id
+
+# Flutter generated files
+.pub/
+
+# Flutter dependency cache
+.packages
+
+# IntelliJ and Android Studio
+.idea/
+
+# VS Code
+.vscode/
+
+# macOS build
+macos/Flutter/ephemeral/
+macos/**
+
+# Ignore Flutter generated files
+.flutter-plugins-dependencies
+
+
+# Linux build
+linux/Flutter/ephemeral/
+
+# Windows build
+windows/Flutter/ephemeral/
+
+# Android Studio project files
+*.iml
+
+# iOS specific
+ios/Pods/
+ios/.symlinks/
+
+# Flutter generated APKs, app bundles, and iOS builds
+*.apk
+*.ipa
+*.app
+
+# Dart tool
+.dart_tool/
+
+# File system
+.DS_Store
+
+# Linux
+*.desktop
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+#android
+android/**
