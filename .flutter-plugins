@@ -1,0 +1,21 @@
+# This is a generated file; do not edit or check into version control.
+flutter_plugin_android_lifecycle=/Users/anooj/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.19/
+geolocator=/Users/anooj/.pub-cache/hosted/pub.dev/geolocator-12.0.0/
+geolocator_android=/Users/anooj/.pub-cache/hosted/pub.dev/geolocator_android-4.6.1/
+geolocator_apple=/Users/anooj/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.7/
+geolocator_web=/Users/anooj/.pub-cache/hosted/pub.dev/geolocator_web-4.0.0/
+geolocator_windows=/Users/anooj/.pub-cache/hosted/pub.dev/geolocator_windows-0.2.3/
+google_maps_flutter=/Users/anooj/.pub-cache/hosted/pub.dev/google_maps_flutter-2.6.1/
+google_maps_flutter_android=/Users/anooj/.pub-cache/hosted/pub.dev/google_maps_flutter_android-2.8.0/
+google_maps_flutter_ios=/Users/anooj/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.13.0/
+google_maps_flutter_web=/Users/anooj/.pub-cache/hosted/pub.dev/google_maps_flutter_web-0.5.8/
+location=/Users/anooj/.pub-cache/hosted/pub.dev/location-6.0.2/
+location_web=/Users/anooj/.pub-cache/hosted/pub.dev/location_web-5.0.1/
+path_provider_linux=/Users/anooj/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1/
+path_provider_windows=/Users/anooj/.pub-cache/hosted/pub.dev/path_provider_windows-2.3.0/
+shared_preferences=/Users/anooj/.pub-cache/hosted/pub.dev/shared_preferences-2.2.3/
+shared_preferences_android=/Users/anooj/.pub-cache/hosted/pub.dev/shared_preferences_android-2.2.2/
+shared_preferences_foundation=/Users/anooj/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.5.2/
+shared_preferences_linux=/Users/anooj/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.4.1/
+shared_preferences_web=/Users/anooj/.pub-cache/hosted/pub.dev/shared_preferences_web-2.4.1/
+shared_preferences_windows=/Users/anooj/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.4.1/

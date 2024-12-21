@@ -151,3 +151,17 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
+
+#big files
+# Ignore build directories and APK files
+build/
+*.apk
+*.so
+*.log
+
+# Ignore other generated files
+.idea/
+.vscode/
+.flutter-plugins
+.flutter-plugins-dependencies
+
