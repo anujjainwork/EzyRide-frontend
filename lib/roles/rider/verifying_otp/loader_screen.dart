@@ -5,7 +5,6 @@ import 'package:ezyride_frontend/roles/rider/ride_started/rider_start_screen.dar
 import 'package:ezyride_frontend/roles/rider/verifying_otp/Loader.dart';
 import 'package:ezyride_frontend/roles/rider/welcome_page/start_riding/enter_location.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -65,10 +64,11 @@ class _LoaderScreenState extends State<LoaderScreen> {
     accessToken = prefs.getString('accessToken');
 
     try {
-      // Get the current location of the device
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
+      // // Get the current location of the device
+      // Position position = await Geolocator.getCurrentPosition(
+      //   desiredAccuracy: LocationAccuracy.lowest,
+      //   forceAndroidLocationManager: true,
+      // );
 
       final response = await http.post(
         Uri.parse(url),
@@ -77,7 +77,7 @@ class _LoaderScreenState extends State<LoaderScreen> {
           'Authorization': 'Bearer $accessToken',
         },
         body: jsonEncode({
-          "pickUpLocation": [position.longitude, position.latitude],
+          // "pickUpLocation": [position.longitude, position.latitude],
           "dropOffLocation": widget.dropLocationCoordinates,
           "dropOffLocationName":widget.dropLocation,
           "totalMembers":widget.totalMembers,

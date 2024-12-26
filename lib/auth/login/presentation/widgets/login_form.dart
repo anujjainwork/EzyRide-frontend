@@ -17,6 +17,25 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
+  @override
+  void initState() {
+    super.initState();
+    final loginProvider = Provider.of<LoginProvider>(context, listen: false);
+
+    // Initialize controllers with values from the provider
+    emailController = TextEditingController(text: loginProvider.email);
+    passwordController = TextEditingController(text: loginProvider.password);
+  }
+
+  @override
+  void dispose() {
+    // Dispose controllers
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,28 +49,28 @@ class _LoginFormState extends State<LoginForm> {
           // Email Field
           CustomTextField(
             label: 'Enter Email',
-            controller: TextEditingController(text: loginProvider.email),
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             screenHeight: getDynamicHeight(context, 100),
             screenWidth: getDynamicWidth(context, 100),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 showCustomSnackbar(context, "Please enter an email");
+                return 'Please enter an email';
               }
-              if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value ?? "")) {
+              if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
                 showCustomSnackbar(context, "Please enter a valid email");
               }
               return null;
             },
             onChanged: (value) => loginProvider.setEmail(value),
           ),
-          SizedBox(height: getDynamicHeight(context,5)),
-
+          SizedBox(height: getDynamicHeight(context, 3)),
 
           // Password Field
           CustomTextField(
             label: 'Enter Password',
-            controller: TextEditingController(text: loginProvider.password),
+            controller: passwordController,
             obscureText: true,
             screenHeight: getDynamicHeight(context, 100),
             screenWidth: getDynamicWidth(context, 100),
@@ -63,8 +82,7 @@ class _LoginFormState extends State<LoginForm> {
             },
             onChanged: (value) => loginProvider.setPassword(value),
           ),
-          SizedBox(height: getDynamicHeight(context,10)),
-
+          SizedBox(height: getDynamicHeight(context, 7)),
 
           ElevatedButton(
             onPressed: () async {
@@ -75,8 +93,8 @@ class _LoginFormState extends State<LoginForm> {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
               minimumSize: Size(
-                getDynamicHeight(context, 50),
-                getDynamicWidth(context, 4),
+                getDynamicHeight(context, 20),
+                getDynamicWidth(context, 3),
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),

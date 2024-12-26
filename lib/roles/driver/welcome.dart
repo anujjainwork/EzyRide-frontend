@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ezyride_frontend/roles/driver/home/home_page.dart';
+import 'package:ezyride_frontend/roles/driver/home/presentation/views/home.dart';
 import 'package:ezyride_frontend/common/widgets/custom_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';

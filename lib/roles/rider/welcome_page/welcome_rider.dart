@@ -7,14 +7,14 @@ import 'package:ezyride_frontend/common/widgets/custom_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
-class WelcomeRider extends StatefulWidget {
-  const WelcomeRider({super.key});
+class RiderHomePage extends StatefulWidget {
+  const RiderHomePage({super.key});
 
   @override
-  State<WelcomeRider> createState() => _WelcomeRiderState();
+  State<RiderHomePage> createState() => _RiderHomePageState();
 }
 
-class _WelcomeRiderState extends State<WelcomeRider> {
+class _RiderHomePageState extends State<RiderHomePage> {
   bool _isMenuOpen = false;
   bool _isIconEnable = true;
   @override

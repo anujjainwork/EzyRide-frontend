@@ -15,8 +15,12 @@ class WebSocketProvider with ChangeNotifier {
   LocationData? locationData;
   LocationData? dropOffLocationData;
   String? dropOffLocationName;
+  Map<String?,LocationData?> dropOffLocationsList = {};
   String? riderName;
+  List<String> riderNames = [];
   int totalRiders = 0;
+  int totalReqMembers = 0;
+  int totalMembers = 0;
   bool isFull = false;
 
   WebSocketChannel? locationChannel;
@@ -33,11 +37,54 @@ class WebSocketProvider with ChangeNotifier {
 
   WebSocketProvider();
 
-  void checkIfFull(){
-    if(totalRiders==4){
+  Future<bool> _checkAndRequestLocationPermission() async {
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+
+    // Check if location services are enabled
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        print('Location services are disabled.');
+        return false;
+      }
+    }
+
+    // Check if location permission is granted
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        print('Location permission denied.');
+        return false;
+      }
+    }
+
+    // Handle "permanently denied" state
+    if (permissionGranted == PermissionStatus.deniedForever) {
+      print('Location permission permanently denied.');
+      // Show a dialog to guide the user to enable permissions
+      return false;
+    }
+
+    print('Location permission granted.');
+    return true;
+  }
+
+  void checkIfFull() {
+    if (totalReqMembers + totalMembers == 4) {
       isFull = true;
       notifyListeners();
     }
+  }
+  void setTotalMembers(){
+    totalMembers += totalReqMembers;
+    notifyListeners();
+  }
+  void addRiderToRiderList(){
+    riderNames.add(riderName!);
+    notifyListeners();
   }
 
   Future<void> init() async {
@@ -47,8 +94,13 @@ class WebSocketProvider with ChangeNotifier {
       print('AccessToken retrieved: $accessToken');
 
       if (accessToken != null) {
-        _initializeLocationWebSocket();
-        _initializeRideWebSocket();
+        final isPermissionGranted = await _checkAndRequestLocationPermission();
+        if (isPermissionGranted) {
+          _initializeLocationWebSocket();
+          _initializeRideWebSocket();
+        } else {
+          print('Cannot initialize WebSockets without location permission.');
+        }
       } else {
         print('No access token found.');
       }
@@ -140,7 +192,9 @@ class WebSocketProvider with ChangeNotifier {
               dropOffLocationData = LocationData.fromMap(locationMap);
 
               dropOffLocationName = rideRequestData['dropOffLocationName'];
+              dropOffLocationsList.putIfAbsent(dropOffLocationName, () => dropOffLocationData);
               riderName = rideRequestData['rider']['user']['name'];
+              totalReqMembers = rideRequestData['totalMembers'];
               notifyListeners();
             }
           }
@@ -187,10 +241,11 @@ class WebSocketProvider with ChangeNotifier {
     try {
       if (rideChannel != null && isConnectedRide) {
         checkIfFull();
+        riderNames.add(riderName!);
+        totalMembers = totalReqMembers;
         const rideMessage = "RIDE_CONFIRMED";
         rideChannel!.sink.add(rideMessage);
         print('ride message sent: $rideMessage');
-        totalRiders++;
         notifyListeners();
       }
     } catch (e) {

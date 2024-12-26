@@ -22,7 +22,7 @@ class LoginRepositoryImpl implements LoginRepository {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: loginEntity.toJson(),
+        body: jsonEncode(loginEntity.toJson()),
       );
 
       if (response.statusCode == 200) {

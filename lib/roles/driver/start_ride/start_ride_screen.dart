@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:ezyride_frontend/roles/driver/websocket_connections/websocket_provider.dart';
+import 'package:ezyride_frontend/common/websocket_connections/websocket_provider.dart';
 import 'package:ezyride_frontend/common/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';

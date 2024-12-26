@@ -1,5 +1,5 @@
 import 'package:ezyride_frontend/auth/login/presentation/view/login.dart';
-import 'package:ezyride_frontend/auth/signup/signup.dart';
+import 'package:ezyride_frontend/auth/signup/presentation/view/signup.dart';
 import 'package:ezyride_frontend/common/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
