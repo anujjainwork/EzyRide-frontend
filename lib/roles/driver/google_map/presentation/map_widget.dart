@@ -19,6 +19,9 @@ class MapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
+      scrollGesturesEnabled: true,
+      zoomControlsEnabled: true,
+      zoomGesturesEnabled:true,
       initialCameraPosition: initialCameraPosition,
       myLocationButtonEnabled: myLocationButtonEnabled,
       markers: markers,

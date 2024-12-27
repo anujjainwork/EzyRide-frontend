@@ -1,6 +1,7 @@
 import 'package:ezyride_frontend/roles/driver/home/presentation/views/home.dart';
 import 'package:ezyride_frontend/roles/driver/ride_created/ride_created_screen.dart';
 import 'package:ezyride_frontend/roles/driver/ride_req_generated/presentation/views/ride_req_generated.dart';
+import 'package:ezyride_frontend/roles/driver/ride_started/presentation/ride_started_screen.dart';
 import 'package:ezyride_frontend/roles/rider/welcome_page/welcome_rider.dart';
 import 'package:flutter/material.dart';
 
@@ -45,11 +46,12 @@ class AppRouter {
           DriverRideCreated(arguments: args),  // Pass the arguments to the widget
           name: AppRouteNames.driverRideCreated,
         );
-      // case AppRouteNames.ridestarted:
-      //   return _buildMaterialPageRoute(
-      //     const DriverRideStarted(),
-      //     name: AppRouteNames.ridestarted,
-      //   );
+      case AppRouteNames.ridestarted:
+        final args = settings.arguments as Map<String, dynamic>;
+        return _buildMaterialPageRoute(
+          DriverRideStarted(arguments: args,),
+          name: AppRouteNames.ridestarted,
+        );
       
       default:
         return _buildMaterialPageRoute(const Scaffold());

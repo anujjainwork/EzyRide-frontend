@@ -1,7 +1,6 @@
 import 'package:ezyride_frontend/common/utils/utils.dart';
 import 'package:ezyride_frontend/common/widgets/custom_text.dart';
 import 'package:ezyride_frontend/roles/driver/ride_created/presentation/provider/ride_created_map_provider.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

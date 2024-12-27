@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  location: ^6.0.2 # Make sure you're using a version that supports background location updates
+  location: ^6.0.2
   provider: ^6.1.2 # This is already correct
   web_socket_channel: ^3.0.1 # Add a version constraint
   google_maps_flutter:

@@ -1,5 +1,5 @@
 import 'package:ezyride_frontend/roles/driver/google_map/data/direction_repo.dart';
-import 'package:ezyride_frontend/roles/driver/google_map/domain/get_route.dart';
+import 'package:ezyride_frontend/roles/driver/google_map/business/get_route.dart';
 import 'package:ezyride_frontend/roles/driver/google_map/presentation/map_widget.dart';
 import 'package:ezyride_frontend/roles/driver/ride_created/presentation/provider/ride_created_map_provider.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +94,7 @@ class _MapPageState extends State<MapPage> {
   }
 
   void _onIdChanged() {
+    if (!mounted) return;
     final mapProvider =
         Provider.of<RideCreatedMapProvider>(context, listen: false);
     final selectedKey =
