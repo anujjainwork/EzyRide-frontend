@@ -8,6 +8,7 @@ import 'package:ezyride_frontend/roles/driver/ride_created/presentation/provider
 import 'package:ezyride_frontend/roles/driver/ride_req_generated/presentation/provider/otp_provider.dart';
 import 'package:ezyride_frontend/roles/rider/welcome_page/check_availability/check_avail_provider.dart';
 import 'package:ezyride_frontend/routes/routes.dart';
+import 'package:ezyride_frontend/splash_screen/presentation/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
        onGenerateRoute: AppRouter.onGenerateRoute,
-      home: AuthPage (), 
+      home: SplashPage (), 
     );
   }
 }
